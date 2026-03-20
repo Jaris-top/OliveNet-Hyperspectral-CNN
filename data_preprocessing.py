@@ -2,10 +2,7 @@ import numpy as np
 from sklearn.decomposition import PCA
 
 def hyperspectral_pca_reduction(data_cube, variance_threshold=0.95):
-    """
-    Hyperspectral Image Dimensionality Reduction using PCA.
-    Corresponds to Section II.B and Figure 4 of the paper.
-    """
+    # Hyperspectral Image Dimensionality Reduction using PCA
     H, W, B = data_cube.shape
     
     # Flatten the spatial dimensions to shape (H*W, B) for PCA
@@ -21,5 +18,4 @@ def hyperspectral_pca_reduction(data_cube, variance_threshold=0.95):
     
     # Reshape back to the 3D spatial cube (H, W, K)
     reduced_cube = reduced_flattened.reshape((H, W, K))
-    
     return reduced_cube, pca
