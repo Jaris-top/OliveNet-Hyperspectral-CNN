@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.8-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-1.10-red.svg)
 ![Status](https://img.shields.io/badge/Status-Completed-success.svg)
-![Publication](https://img.shields.io/badge/Publication-IEEE_IEECT_2025-orange.svg)
+![Publication](https://img.shields.io/badge/Publication-IEEE_ICEACE_2025-orange.svg)
 
 <p align="center">
   <img src="cover.png" alt="Hyperspectral Scanning Concept" width="800">
