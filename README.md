@@ -1,4 +1,4 @@
-# OliveNet: Deep Learning for Hyperspectral Gemstone Identification
+# OliveNet: Deep Learning for Mineralogical Characterisation
 
 ![Python](https://img.shields.io/badge/Python-3.8-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-1.10-red.svg)
