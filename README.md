@@ -27,5 +27,5 @@ To meet the requirements of on-site rapid identification, OliveNet was designed 
 * **Size:** 1.2M parameters (78% smaller than ResNet18 and 3X faster).
 
 ## 🏆 Academic & Professional Outcomes
-* **Publication:** Accepted by 2025 IEEE 3rd International Conference on Electrical, Automation and ComputerEngineering (ICEACE 2025). IEEE.
+* **Publication:** Accepted by 2025 IEEE 3rd International Conference on Electrical, Automation and Computer Engineering (ICEACE 2025). IEEE.
 * **Intellectual Property:** Registered National Computer Software Copyright (Registration No. 2025SR0655319).
