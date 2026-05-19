@@ -1,5 +1,7 @@
 # OliveNet: Rapid Gemstone Authenticity Identification
 
+![OliveNet hyperspectral workflow](assets/olivenet-workflow-cover.png)
+
 This repository turns the paper **"Research on a Rapid Gemstone Authenticity Identification Method Based on Hyperspectral Imaging and Convolutional Neural Network"** into a reproducible engineering project.
 
 The project implements a practical pipeline for olivine authenticity identification from hyperspectral imaging data:
