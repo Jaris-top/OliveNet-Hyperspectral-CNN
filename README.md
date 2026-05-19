@@ -11,6 +11,12 @@ The project implements a practical pipeline for olivine authenticity identificat
 3. train a lightweight CNN, **OliveNet**, for `natural`, `synthetic`, and `dyed` olivine classification;
 4. run single-sample inference and export metrics.
 
+## Technical Workflow
+
+![Detailed OliveNet technical workflow](assets/olivenet-technical-workflow.png)
+
+The workflow above summarizes the paper-to-code path implemented in this repository: calibrated hyperspectral acquisition, PCA-based spectral compression, OliveNet training, evaluation, and single-cube inference.
+
 ## Paper-To-Code Mapping
 
 | Paper component | Implemented location |
