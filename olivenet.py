@@ -247,11 +247,40 @@ def accuracy(y_true: list[int], y_pred: list[int]) -> float:
     return float((true == pred).mean()) if len(true) else 0.0
 
 
+def precision_recall_f1(
+    y_true: list[int],
+    y_pred: list[int],
+    num_classes: int,
+) -> dict[str, float | list[float]]:
+    matrix = confusion_matrix(y_true, y_pred, num_classes)
+    precision = []
+    recall = []
+    f1 = []
+
+    for idx in range(num_classes):
+        tp = matrix[idx, idx]
+        fp = matrix[:, idx].sum() - tp
+        fn = matrix[idx, :].sum() - tp
+
+        p = float(tp / (tp + fp + EPS))
+        r = float(tp / (tp + fn + EPS))
+        score = float(2 * p * r / (p + r + EPS))
+
+        precision.append(p)
+        recall.append(r)
+        f1.append(score)
+
+    return {
+        "precision_per_class": precision,
+        "recall_per_class": recall,
+        "f1_per_class": f1,
+        "macro_precision": float(np.mean(precision)),
+        "macro_recall": float(np.mean(recall)),
+        "macro_f1": float(np.mean(f1)),
+    }
+
+
 def confusion_matrix(y_true: list[int], y_pred: list[int], num_classes: int) -> np.ndarray:
-    matrix = np.zeros((num_classes, num_classes), dtype=int)
-    for true, pred in zip(y_true, y_pred):
-        matrix[true, pred] += 1
-    return matrix
 
 
 def set_seed(seed: int) -> None:
@@ -469,6 +498,26 @@ def train_model(cfg: dict[str, Any]) -> None:
     result = {
         "best_val_accuracy": best_val,
         "test_accuracy": test_metrics["accuracy"],
+        "confusion_matrix": confusion_matrix(test_metrics["y_true"], test_metrics["y_pred"], len(classes)).tolist(),
+        "parameters": count_parameters(model),
+        "pca_components": projector.components_count,
+        "history": history,
+    }
+    test_scores = precision_recall_f1(
+    test_metrics["y_true"],
+    test_metrics["y_pred"],
+    len(classes),
+    )
+
+    result = {
+        "best_val_accuracy": best_val,
+        "test_accuracy": test_metrics["accuracy"],
+        "test_macro_precision": test_scores["macro_precision"],
+        "test_macro_recall": test_scores["macro_recall"],
+        "test_macro_f1": test_scores["macro_f1"],
+        "test_precision_per_class": dict(zip(classes, test_scores["precision_per_class"])),
+        "test_recall_per_class": dict(zip(classes, test_scores["recall_per_class"])),
+        "test_f1_per_class": dict(zip(classes, test_scores["f1_per_class"])),
         "confusion_matrix": confusion_matrix(test_metrics["y_true"], test_metrics["y_pred"], len(classes)).tolist(),
         "parameters": count_parameters(model),
         "pca_components": projector.components_count,
