@@ -125,6 +125,10 @@ For the paper setup, the expected acquisition range is:
 
 This project is a reproducible engineering implementation of the research workflow, not a certified gemological instrument. Real deployment requires calibrated acquisition hardware, controlled illumination, verified labels, sample-level data splitting, and external validation.
 
+## Intellectual Property
+Software Copyright Registration No. **2025SR0655319**  
+Registered with the National Copyright Administration of China, April 2025.
+
 ## Citation
 If you use this code, please cite the original paper:
 
@@ -139,7 +143,3 @@ If you use this code, please cite the original paper:
   pages={932-936},
   keywords={Accuracy;Fluctuations;Transfer learning;Lighting;Feature extraction;Convolutional neural networks;Object recognition;Contamination;Hyperspectral imaging;Principal component analysis;Hyper-spectral imaging;Convolutional Neural Network;Identification of olivine authenticity;Rapid identification;Lightweight model},
   doi={10.1109/ICEACE67491.2025.11439579}}
-
-## Intellectual Property
-Software Copyright Registration No. **2025SR0655319**  
-Registered with the National Copyright Administration of China, April 2025.
