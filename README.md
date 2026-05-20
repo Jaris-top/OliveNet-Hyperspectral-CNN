@@ -68,6 +68,12 @@ python olivenet.py predict \
 
 The demo data is synthetic and exists only to verify that the full pipeline runs end to end. Scientific reporting should use calibrated real hyperspectral olivine cubes with verified sample provenance.
 
+## Validation Scope
+
+This repository provides a reproducible engineering implementation of the paper-inspired OliveNet workflow. The built-in demo dataset is synthetic and is intended only to test the code path from data generation to inference.
+
+Reported scientific performance should be evaluated with calibrated real hyperspectral cubes, verified gemstone labels, sample-level train/validation/test splitting, and external validation. The original paper's reported accuracy is treated as a reference target, not as a claim reproduced by this repository.
+
 ## Real Data Format
 
 Prepare real data as:
