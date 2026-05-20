@@ -30,7 +30,7 @@ class Sample:
 class PcaProjector:
     """PCA wrapper for compressing hyperspectral cubes to the paper's 8-12 bands."""
 
-    n_components: int | float = 0.95
+    n_components: int | float = 0.95 # Paper Eq.(3): retain ≥95% cumulative variance, K=8-12
     random_state: int = 42
 
     def __post_init__(self) -> None:
@@ -51,7 +51,7 @@ class PcaProjector:
         return int(self.model.n_components_)
 
 
-def reflectance_correction(
+def reflectance_correction( # Paper Eq.(5): R = (I-D)/(W-D)
     cube: np.ndarray,
     white: np.ndarray | None = None,
     dark: np.ndarray | None = None,
@@ -97,12 +97,15 @@ def center_crop_or_pad(cube: np.ndarray, size: int) -> np.ndarray:
     return out
 
 
-def augment_cube(cube: np.ndarray) -> np.ndarray:
+def augment_cube(cube: np.ndarray) -> np.ndarray: # Paper Section III-C: spectral shift ±5nm, rotation ±15°, brightness ±10%
     """Apply lightweight spectral/spatial perturbations described in the paper."""
     if random.random() < 0.5:
         cube = np.roll(cube, shift=random.choice([-1, 1]), axis=2)
     if random.random() < 0.5:
-        cube = np.rot90(cube, k=random.randint(0, 3), axes=(0, 1)).copy()
+# Paper Section III-C: spatial augmentation ±15° rotation
+        from scipy.ndimage import rotate as scipy_rotate
+        angle = random.uniform(-15, 15)
+        cube = scipy_rotate(cube, angle, axes=(0, 1), reshape=False)
     if random.random() < 0.5:
         cube = np.clip(cube * random.uniform(0.9, 1.1), 0.0, 1.5)
     return cube.astype(np.float32)
@@ -206,13 +209,16 @@ class OliveNet(nn.Module):
 
     def __init__(self, input_channels: int, num_classes: int = 3, dropout: float = 0.5) -> None:
         super().__init__()
-        self.stem = nn.Sequential(
-            nn.Conv2d(input_channels, 32, kernel_size=3, stride=2, padding=1, bias=False),
-            nn.BatchNorm2d(32),
+# Paper Section III-C, Block 1:
+# "32 3×3×K 3D convolution kernels to extract low-level spectral-spatial features"
+        self.block1_3d = nn.Sequential(
+            nn.Conv3d(1, 32, kernel_size=(input_channels, 3, 3), padding=(0, 1, 1)),
+            nn.BatchNorm3d(32),
             nn.ReLU(inplace=True),
         )
-        self.blocks = nn.Sequential(
-            ConvBlock(32, 32),
+# Paper Section III-C, Block 2-3:
+# "2D convolution to reduce computational complexity vs pure 3D-CNN by 60%"
+        self.blocks_2d = nn.Sequential(
             ConvBlock(32, 64),
             ConvBlock(64, 128),
         )
@@ -223,9 +229,11 @@ class OliveNet(nn.Module):
             nn.Linear(128, num_classes),
         )
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        x = self.stem(x)
-        x = self.blocks(x)
+    def forward(self, x):
+        x = x.unsqueeze(1)          # (B, K, H, W) → (B, 1, K, H, W)
+        x = self.block1_3d(x)       # → (B, 32, 1, H, W)
+        x = x.squeeze(2)            # → (B, 32, H, W)
+        x = self.blocks_2d(x)
         return self.head(x)
 
 
@@ -356,11 +364,11 @@ def default_config(data_root: str = "demo_data", output_dir: str = "demo_outputs
             "output_dir": output_dir,
             "batch_size": 8,
             "epochs": 10,
-            "learning_rate": 0.001,
-            "weight_decay": 0.0001,
+            "learning_rate": 0.001, # Paper Section III-C: Adam lr=0.001, decay 10% per 5 epochs
+            "weight_decay": 0.00001,
             "lr_decay_step": 5,
             "lr_decay_gamma": 0.9,
-            "early_stopping_patience": 5,
+            "early_stopping_patience": 5, # Paper Section III-C: stop if val_acc no improvement for 5 epochs
         },
     }
 
