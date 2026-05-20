@@ -152,3 +152,4 @@ If you use this code, please cite the original paper:
   pages={932-936},
   keywords={Accuracy;Fluctuations;Transfer learning;Lighting;Feature extraction;Convolutional neural networks;Object recognition;Contamination;Hyperspectral imaging;Principal component analysis;Hyper-spectral imaging;Convolutional Neural Network;Identification of olivine authenticity;Rapid identification;Lightweight model},
   doi={10.1109/ICEACE67491.2025.11439579}}
+```
