@@ -14,6 +14,7 @@ The project focuses on a complete paper-to-code workflow: calibrated hyperspectr
 
 ![Detailed OliveNet technical workflow](olivenet-technical-workflow.png)
 *Click to enlarge — or see the [full-size image](olivenet-technical-workflow.png)*
+
 The complete runnable implementation is contained in [`olivenet.py`](olivenet.py), including preprocessing, PCA projection, OliveNet model definition, training, evaluation, synthetic demo data generation, and single-cube inference.
 
 ## Highlights
