@@ -2,7 +2,7 @@
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-1.10-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![IEEE](https://img.shields.io/badge/IEEE-ICEACE2025-red)
+![Paper](https://img.shields.io/badge/Paper-IEEE%20ICEACE%202025-red)
 
 ![OliveNet hyperspectral workflow](olivenet-workflow-cover.png)
 
@@ -45,6 +45,8 @@ The complete runnable implementation is contained in [`olivenet.py`](olivenet.py
 ```text
 README.md
 olivenet.py
+requirements.txt
+LICENSE
 olivenet-workflow-cover.png
 olivenet-technical-workflow.png
 ```
@@ -69,7 +71,7 @@ Install dependencies:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install numpy scikit-learn torch tqdm pyyaml
+pip install -r requirements.txt
 ```
 
 Run the built-in synthetic demo:
@@ -89,6 +91,13 @@ This repository provides a fully reproducible implementation of the paper's meth
 The synthetic demo dataset is provided to verify pipeline integrity. 
 Reproducing the paper's reported 98.3% accuracy requires real calibrated hyperspectral 
 olivine cubes acquired under the conditions described in Section III-B of the paper.
+
+## Reproducibility Notes
+
+- Random seeds are fixed for Python, NumPy, and PyTorch.
+- PCA is fitted only on the training split to avoid test-set leakage.
+- Train/validation/test splits are performed at the sample level.
+- The synthetic demo is intended for code-path validation, not scientific performance reporting.
 
 ## Real Data Format
 
@@ -121,9 +130,9 @@ For the paper setup, the expected acquisition range is:
 - classes: `natural`, `synthetic`, `dyed`
 - target single-sample inference time: about `0.45 s`
 
-## Notes
+## Limitations
 
-This project is a reproducible engineering implementation of the research workflow, not a certified gemological instrument. Real deployment requires calibrated acquisition hardware, controlled illumination, verified labels, sample-level data splitting, and external validation.
+This project is not a certified gemological instrument. Deployment in real gemological screening requires calibrated acquisition hardware, controlled illumination, verified sample provenance, and external validation on independently collected hyperspectral cubes.
 
 ## Intellectual Property
 Software Copyright Registration No. **2025SR0655319**  
