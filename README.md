@@ -102,3 +102,18 @@ For the paper setup, the expected acquisition range is:
 ## Notes
 
 This project is a reproducible engineering implementation of the research workflow, not a certified gemological instrument. Real deployment requires calibrated acquisition hardware, controlled illumination, verified labels, sample-level data splitting, and external validation.
+
+## Citation
+If you use this code, please cite the original paper:
+
+```bibtex
+@INPROCEEDINGS{11439579,
+  author={Yu, Jiarui},
+  booktitle={2025 IEEE 3rd International Conference on Electrical, Automation and Computer Engineering (ICEACE)}, 
+  title={Research on a Rapid Gemstone Authenticity Identification Method Based on Hyperspectral Imaging and Convolutional Neural Network}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={932-936},
+  keywords={Accuracy;Fluctuations;Transfer learning;Lighting;Feature extraction;Convolutional neural networks;Object recognition;Contamination;Hyperspectral imaging;Principal component analysis;Hyper-spectral imaging;Convolutional Neural Network;Identification of olivine authenticity;Rapid identification;Lightweight model},
+  doi={10.1109/ICEACE67491.2025.11439579}}
