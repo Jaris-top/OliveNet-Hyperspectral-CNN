@@ -13,6 +13,7 @@ The project focuses on a complete paper-to-code workflow: calibrated hyperspectr
 ## Technical Workflow
 
 ![Detailed OliveNet technical workflow](olivenet-technical-workflow.png)
+*Click to enlarge — or see the [full-size image](olivenet-technical-workflow.png)*
 
 ## Highlights
 
