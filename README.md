@@ -1,4 +1,8 @@
 # OliveNet: Hyperspectral-CNN for Rapid Olivine Authentication
+![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![PyTorch](https://img.shields.io/badge/PyTorch-1.10-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
+![IEEE](https://img.shields.io/badge/IEEE-ICEACE2025-red)
 
 ![OliveNet hyperspectral workflow](olivenet-workflow-cover.png)
 
